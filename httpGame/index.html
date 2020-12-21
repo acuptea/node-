@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div>
+      <button @click="handleClick('0')">石头</button>
+      <button @click="handleClick('1')">剪刀</button>
+      <button @click="handleClick('2')">布</button>
+    </div>
+    <div style="margin-top: 30px;width: 400px;height: 200px;background: #eee;border-radius: 4px;">
+      <p v-for="item in resData">
+        <span style="margin-right: 5px;">{{item.time}}：</span><span>{{item.result}}</span>
+      </p>
+    </div>
+  </div>
+  <script type="text/javascript">
+    const getType = {
+      '0':'rock',
+      '1': 'scissor',
+      '3': 'paper'
+    }
+
+    var app = new Vue({
+      el:'#app',
+      data() {
+        return {
+          resData:[]
+        }
+      },
+      methods: {
+        handleClick(type) {
+          fetch(`http://${location.host}/api/game?action=${getType[type]}`).then((res)=>{
+            return res.text()
+          }).then(text=>{
+            this.resData.push(JSON.parse(text))
+          })
+        }
+      }
+    })
+  </script>
+</body>
+</html>
