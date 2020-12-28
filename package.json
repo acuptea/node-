@@ -18,6 +18,7 @@
   "homepage": "https://github.com/acuptea/node-learning-note#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "glob": "^7.1.6"
+    "glob": "^7.1.6",
+    "protocol-buffers": "^4.2.0"
   }
 }
